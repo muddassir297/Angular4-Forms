@@ -1,0 +1,43 @@
+<!--Template forms Start using directives-->
+<h1>Template Form in Student component</h1>
+<form #sf=ngForm (submit) = 'saveSubmit(sf.value)'>
+  <label for="">Student Name:</label>
+  <input type="text" name="studentName" ngModel #sname=ngModel required minlength="10"/><br/>
+  <div *ngIf='(sname.touched || sname.dirty) && sname.errors' >
+    <div *ngIf='sname.errors.required' style="color: red">
+        Name Mandetory
+      </div>
+  </div>
+  
+  <label for="">Student Password:</label>
+  <input type="text" name="studentPswd" ngModel #spswd=ngModel required minlength="8" pattern="[A-Za-z]"/><br/>
+  <div *ngIf='(spswd.touched || spswd.dirty) && spswd.errors' >
+    <div *ngIf='spswd.errors.required' style="color: red">Password Required
+  </div>
+  <div *ngIf='spswd.errors.pattern' style="color: red">Match pattern
+  </div>
+  </div>
+  
+
+  <label> Gender</label>
+  <input type="radio" name="studentGender" value="male" ngModel #sgender=ngModel required/>
+  <input type="radio" name="studentGender" value="female" required ngModel/>
+
+  <div *ngIf="(sgender.touched || sgender.dirty) && sgender.errors">
+    <div *ngIf="sgender.errors.required" style="color: red">Gender is Mandetory</div>
+  </div>
+  
+  <br/>
+  <label>Qualification:</label>
+  <select name="studEducation" id="" ngModel #sedu=ngModel required>
+    <option value="">---Select Education---</option>
+    <option *ngFor="let edu of studentEducation" [value]=edu>{{edu}}</option>    
+  </select>
+  <div *ngIf='(sedu.touched || sedu.dirty) && sedu.errors'>
+    <div *ngIf='sedu.errors.required' style="color:red"> Field required</div>
+  </div>
+  
+  <br/>
+  <button type="submit">Save Student</button>
+</form>
+<!--Template forms End-->

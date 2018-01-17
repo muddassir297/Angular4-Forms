@@ -1,0 +1,49 @@
+<h1>Reactive Form in user component</h1>
+<form [formGroup]=userform (ngSubmit)='saveUser(userform.value)'>
+  <label for="">User Name:</label>
+  <input type="text" name="name" formControlName =userName><br/>
+  <div *ngIf="(userform.controls.userName.touched || userform.controls.userName.dirty) && userform.controls.userName.errors">
+    <div *ngIf="userform.controls.userName.errors.required" style="color:red">
+      Field required
+    </div>
+  </div>
+<hr>
+<label for="">Password:</label>
+  <input type="password" name="password" formControlName =userPaswrd><br/>
+  <div *ngIf="(userform.controls.userPaswrd.touched || userform.controls.userPaswrd.dirty) && userform.controls.userPaswrd.errors">
+    <div *ngIf="userform.controls.userPaswrd.errors.required" style="color:red">
+      Field required
+    </div>
+  </div>
+<hr>
+<label for="">Male:</label>
+  <input type="radio" value="male" formControlName =userGender><br/>
+  <label for="">Female:</label>
+  <input type="radio" value="female" formControlName =userGender><br/>
+  <div *ngIf="(userform.controls.userGender.touched || userform.controls.userGender.dirty) && userform.controls.userGender.errors">
+    <div *ngIf="userform.controls.userGender.errors.required" style="color:red">
+      Field required
+    </div>
+  </div>
+<hr>
+<label for="">Education:</label>
+  <select formControlName = "userEducation">
+    <option value="">--select--</option>
+    <option [value]=edu *ngFor='let edu of education'>{{edu}}</option>
+  </select>
+  <div *ngIf="(userform.controls.userEducation.touched || userform.controls.userEducation.dirty) && userform.controls.userEducation.errors">
+    <div *ngIf="userform.controls.userEducation.errors.required" style="color:red">
+      Field required
+    </div>
+  </div>
+<hr>
+<label for="">Terms and Condition:</label>
+  <input (change)='checkifChecked()' type="checkbox" [value]=termsCond formControlName =termsNcondition><br/>
+  <div *ngIf="(userform.controls.termsNcondition.touched || userform.controls.termsNcondition.dirty) && userform.controls.termsNcondition.errors">
+    <div *ngIf="userform.controls.termsNcondition.errors.required" style="color:red">
+      Field required
+    </div>
+  </div>
+  <hr>
+  <button type="submit"> Save User</button>
+</form>
